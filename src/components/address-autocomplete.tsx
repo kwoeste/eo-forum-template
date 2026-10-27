@@ -255,11 +255,9 @@ export function AddressAutocomplete({
         </div>
       )}
 
-      {error && !isOpen && (
+      {error && error !== "Places API not configured" && !isOpen && (
         <p className="text-xs text-slate-400 mt-1">
-          {error === "Places API not configured"
-            ? "Address suggestions unavailable"
-            : "Address suggestions temporarily unavailable"}
+          Address suggestions temporarily unavailable
         </p>
       )}
     </div>

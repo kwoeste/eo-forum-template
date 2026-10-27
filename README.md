@@ -26,7 +26,7 @@ The forum's name, chapter, officer emails and the list of allowed members are al
 | Vercel | runs the website, stores uploaded files (Blob) | free "Hobby" plan is usually enough for one forum. Vercel's terms may require the paid Pro plan (~$20/month) for some uses. Check. |
 | Neon | the database | free tier is usually enough |
 | Clerk | member sign-in | free tier covers far more users than one forum |
-| Google Cloud | address autocomplete when typing event locations | needs a billing card on file. A forum's usage is usually inside Google's free monthly credit (estimate) |
+| Google Cloud (**optional**) | address suggestions when typing event locations. Optional, and the most technical step; skip it and addresses are typed by hand | needs a billing card on file. A forum's usage is usually inside Google's free monthly credit (estimate) |
 | Resend (optional) | "report a problem" emails | free tier |
 
 Plan on about **1–3 hours** for setup if you've never done this before. An AI coding agent can do most of it for you: see **AGENTS.md**.
@@ -43,7 +43,7 @@ Plan on about **1–3 hours** for setup if you've never done this before. An AI 
    - For your real site, create a **Production instance** in Clerk and follow its steps to add your domain (it will ask you to add a few DNS records). The "Development" keys (`pk_test_`) work for trying things out.
    - Recommended: in Clerk → **Restrictions**, turn on **Allowlist** or set sign-ups to **Restricted** so only invited people can join.
 
-**5. Get a Google Maps key (address autocomplete).** Go to https://console.cloud.google.com, create a project, add billing, then **APIs & Services → Library → enable "Places API (New)"**. Then **Credentials → Create credentials → API key**. Restrict the key to the Places API. This is `GOOGLE_PLACES_API_KEY`. (Without it the site still works; you'll just type addresses without suggestions.)
+**5. (Optional) Get a Google Maps key for address suggestions.** *Optional, and the most technical step; skip it and addresses are typed by hand.* If you want it: Go to https://console.cloud.google.com, create a project, add billing, then **APIs & Services → Library → enable "Places API (New)"**. Then **Credentials → Create credentials → API key**. Restrict the key to the Places API. This is `GOOGLE_PLACES_API_KEY`. Without it the site works normally; members just type addresses.
 
 **6. Create a Vercel account** at https://vercel.com (sign in with GitHub). Click **Add New → Project**, choose your repository, and before clicking Deploy open **Environment Variables** and add these (full list with explanations is in `.env.example`):
 
@@ -62,7 +62,7 @@ Plan on about **1–3 hours** for setup if you've never done this before. An AI 
    | `NEXT_PUBLIC_CLERK_SIGN_IN_URL` = `/sign-in`, `NEXT_PUBLIC_CLERK_SIGN_UP_URL` = `/sign-up` | type exactly these |
    | `DATABASE_URL` | from step 3 |
    | `SEED_SECRET` | make up a long random password-like string |
-   | `GOOGLE_PLACES_API_KEY` | from step 5 |
+   | `GOOGLE_PLACES_API_KEY` | **optional**, from step 5. Optional, and the most technical step; skip it and addresses are typed by hand |
    | `RESEND_API_KEY`, `BUG_REPORT_TO_EMAIL` | optional, from https://resend.com |
 
    Then click **Deploy**.
